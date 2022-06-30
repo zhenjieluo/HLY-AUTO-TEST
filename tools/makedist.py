@@ -1,3 +1,10 @@
+# /*
+#  * @Author: luo zhenjie 
+#  * @Date: 2022-06-30 10:32:47 
+#  * @Last Modified by:   luo zhenjie 
+#  * @Last Modified time: 2022-06-30 10:32:47 
+#  */
+
 import pandas as pd
 
 def makedist():

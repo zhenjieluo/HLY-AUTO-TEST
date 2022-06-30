@@ -1,3 +1,10 @@
+# /*
+#  * @Author: luo zhenjie 
+#  * @Date: 2022-06-30 10:31:01 
+#  * @Last Modified by:   luo zhenjie 
+#  * @Last Modified time: 2022-06-30 10:31:01 
+#  */
+
 from ast import Param
 from email import header
 from email.header import Header
@@ -12,6 +19,7 @@ import operator
 from functools import reduce
 import numpy as np
 import requests,json,openpyxl,time,datetime
+from tqdm import trange
 
 from yaml import serialize
 
@@ -50,46 +58,51 @@ def getData():
                 sheet = wb.active
                 sheet.title ='真实数据'
                 cycle = data1['responseData']['total']
+                page = (cycle+9)//10
                 starttime = datetime.datetime.now()
-                for i in range(cycle):
+                for i in trange(page):
+                    x = 0
                     url = url2
                     params1 = {
                             'machineId':machineid,  #'BWKrSsFP7EiGc2pEgEgA'
                             'startTime':(timeStamp*1000),  #1650902400000
                             'endTime':(timeStamp1*1000),      #1651075200000
                             'page':num,
-                            'per_page':1
+                            'per_page':10
                         }
+                    num += 1
                     response1 = requests.get(url=url,headers=headers,params=params1)
                     data2 = response1.text
                     data3 = json.loads(data2)
-                    TIME = othertime(data3['responseData']['dataList'][0]['timestamp'])
-                    data4 = search('responseData.dataList[].[dataPoints[].[dataPointValue]]',data3)
-                    data5 = np.ravel(data4)
-                    data6 = search('responseData.dataList[].[dataPoints[].[dataPointAlias]]',data3)
-                    data7 = np.ravel(data6)
-                    timestamp4 = search('responseData.dataList[].[dataPoints[].[dataPointTimestamp]]',data3)
-                    timestamp5 = np.ravel(timestamp4)
-                    L = []
-                    M = []
-                    S = []
-                    Q = []
-                    for i in range(len(timestamp5)):
-                        l = othertime(timestamp5[i])
-                        L.append(l)
-                    for i in range(len(data5)):
-                        m = data5[i]
-                        M.append(m)
-                    for i in range(len(data7)):
-                        q = data7[i]
-                        Q.append(q)
-                    sheetdata = reduce(operator.add,list(zip(L,Q,M)))
-                    for i in range(len(sheetdata)):
-                        s = sheetdata[i]
-                        S.append(s)
-                    S.insert(0,TIME)
-                    sheet.append(S)
-                    num += 1
+                    size = len(data3['responseData']['dataList'])
+                    for i in range(size):
+                        TIME = othertime(data3['responseData']['dataList'][x]['timestamp'])
+                        data4 = search('responseData.dataList[%s].[dataPoints[].[dataPointValue]]'%x,data3)
+                        data5 = np.ravel(data4)
+                        data6 = search('responseData.dataList[%s].[dataPoints[].[dataPointAlias]]'%x,data3)
+                        data7 = np.ravel(data6)
+                        timestamp4 = search('responseData.dataList[%s].[dataPoints[].[dataPointTimestamp]]'%x,data3)
+                        timestamp5 = np.ravel(timestamp4)
+                        L = []
+                        M = []
+                        S = []
+                        Q = []
+                        for i in range(len(timestamp5)):
+                            l = othertime(timestamp5[i])
+                            L.append(l)
+                        for i in range(len(data5)):
+                            m = data5[i]
+                            M.append(m)
+                        for i in range(len(data7)):
+                            q = data7[i]
+                            Q.append(q)
+                        sheetdata = reduce(operator.add,list(zip(L,Q,M)))
+                        for i in range(len(sheetdata)):
+                            s = sheetdata[i]
+                            S.append(s)
+                        S.insert(0,TIME)
+                        sheet.append(S)
+                        x += 1
                 wb.save('real.xlsx')
                 endtime = datetime.datetime.now()
                 usetime = (endtime - starttime).seconds
@@ -118,7 +131,7 @@ def getData():
             'startTime':(timeStamp*1000),  #1650902400000
             'endTime':(timeStamp1*1000),      #1651075200000
             'page':1,
-            'perPage':5
+            'perPage':10
                     }
             response = requests.get(url=url,headers=headers,params=params)
             data = response.text
@@ -129,8 +142,10 @@ def getData():
                 sheet = wb.active
                 sheet.title ='真实数据'
                 cycle = data1['data']['total']
+                page = (cycle+9)//10
                 starttime = datetime.datetime.now()
-                for i in range(cycle):
+                for i in trange(page):
+                    x = 0
                     url = url1
                     params1 = {
                             'category' : 'thing',
@@ -139,38 +154,41 @@ def getData():
                             'startTime':(timeStamp*1000),  #1650902400000
                             'endTime':(timeStamp1*1000),      #1651075200000
                             'page':num,
-                            'perPage':1
+                            'perPage':10
                                     }
+                    num += 1
                     response1 = requests.get(url=url,headers=headers,params=params1)
                     data2 = response1.text
                     data3 = json.loads(data2)
-                    TIME = othertime(data3['data']['dataList'][0]['timestamp'])
-                    data4 = search('data.dataList[].[dataPoints[].[dataPointValue]]',data3)
-                    data5 = np.ravel(data4)
-                    data6 = search('data.dataList[].[dataPoints[].[dataPointAlias]]',data3)
-                    data7 = np.ravel(data6)
-                    timestamp4 = search('data.dataList[].[dataPoints[].[dataPointTimestamp]]',data3)
-                    timestamp5 = np.ravel(timestamp4)
-                    L = []
-                    M = []
-                    S = []
-                    Q = []
-                    for i in range(len(timestamp5)):
-                        l = othertime(timestamp5[i])
-                        L.append(l)
-                    for i in range(len(data5)):
-                        m = data5[i]
-                        M.append(m)
-                    for i in range(len(data7)):
-                        q = data7[i]
-                        Q.append(q)
-                    sheetdata = reduce(operator.add,list(zip(L,Q,M)))
-                    for i in range(len(sheetdata)):
-                        s = sheetdata[i]
-                        S.append(s)
-                    S.insert(0,TIME)
-                    sheet.append(S)
-                    num += 1
+                    size = len(data3['data']['dataList'])
+                    for i in range(size):
+                        TIME = othertime(data3['data']['dataList'][x]['timestamp'])
+                        data4 = jmespath.search('data.dataList[%s].[dataPoints[].[dataPointValue]]'%x,data3)
+                        data5 = np.ravel(data4)
+                        data6 = jmespath.search('data.dataList[%s].[dataPoints[].[dataPointAlias]]'%x,data3)
+                        data7 = np.ravel(data6)
+                        timestamp4 = jmespath.search('data.dataList[%s].[dataPoints[].[dataPointTimestamp]]'%x,data3)
+                        timestamp5 = np.ravel(timestamp4)
+                        L = []
+                        M = []
+                        S = []
+                        Q = []
+                        for i in range(len(timestamp5)):
+                            l = othertime(timestamp5[i])
+                            L.append(l)
+                        for i in range(len(data5)):
+                            m = data5[i]
+                            M.append(m)
+                        for i in range(len(data7)):
+                            q = data7[i]
+                            Q.append(q)
+                        sheetdata = reduce(operator.add,list(zip(L,Q,M)))
+                        for i in range(len(sheetdata)):
+                            s = sheetdata[i]
+                            S.append(s)
+                        S.insert(0,TIME)
+                        sheet.append(S)
+                        x +=1
                 wb.save('real.xlsx')
                 endtime = datetime.datetime.now()
                 usetime = (endtime - starttime).seconds
