@@ -1,9 +1,9 @@
 # HLY_AUTO_TEST
 
 
-> 开发环境: VScode
+> 开发环境: Pycharm
 >
-> 开发语言&版本:  python3.7.8
+> 开发语言&版本:  python3.9
 >
 > 测试框架: Pytest、测试报告: Allure
 >
