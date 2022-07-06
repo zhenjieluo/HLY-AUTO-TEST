@@ -27,42 +27,13 @@ cloud.device_id = 'BllRQflFa1jvbcZE4DYA'
 
 def test_steal_oil_check_equal_400():
     print('已开始进行偷油量等于400功能测试')
-    while True:
-        start_collect = re.search('sent done', HLY.com_read())
-        if start_collect:
-            print('正在模拟探头数据，液位高度设置为3000')
-            for i in range(30):
-                HLY.com_send1('*XD,0001,02,3000,3000,0005,0253,1344#')
-                time.sleep(1)
-            break
-        else:
-            continue
-
-    while True:
-        report_data = re.search('sendStr', HLY.com_read())
-        if report_data:
-            print('设备已进行主动上报')
-            time.sleep(60)
-            break
-        else:
-            continue
-
-    while True:
-        oh_data = jsonpath.jsonpath(cloud.get_device_detail(),
-                                    '$...dataPoints[?(@.dataPointName == "OH" )].dataPointReportedValue')
-        print(oh_data)
-        if oh_data == [3000]:
-            break
-        else:
-            continue
-    print('油位高度已调整为3000')
-
+    HLY.init_data(1, 2, 3000, 3000, 0)
     while True:
         start_collect = re.search('sent done', HLY.com_read())
         if start_collect:
             print('正在模拟探头数据，液位高度设置为2600')
             for i in range(30):
-                HLY.com_send1('*XD,0001,02,2600,2600,0005,0253,1354#')
+                HLY.com_send1(HLY.create_data(1, 2, 2600, 2600, 0))
                 time.sleep(1)
             break
         else:
@@ -88,42 +59,13 @@ def test_steal_oil_check_equal_400():
 
 def test_steal_oil_check_lessthan_400():
     print('已开始进行偷油量小于400功能测试')
-    while True:
-        start_collect = re.search('sent done', HLY.com_read())
-        if start_collect:
-            print('正在模拟探头数据，液位高度设置为2600')
-            for i in range(30):
-                HLY.com_send1('*XD,0001,02,2600,2600,0005,0253,1354#')
-                time.sleep(1)
-            break
-        else:
-            continue
-
-    while True:
-        report_data = re.search('sendStr', HLY.com_read())
-        if report_data:
-            print('设备已进行主动上报')
-            time.sleep(60)
-            break
-        else:
-            continue
-
-    while True:
-        oh_data = jsonpath.jsonpath(cloud.get_device_detail(),
-                                    '$...dataPoints[?(@.dataPointName == "OH" )].dataPointReportedValue')
-        print(oh_data)
-        if oh_data == [2600]:
-            break
-        else:
-            continue
-    print('油位高度已调整为2600')
-
+    HLY.init_data(1, 2, 2600, 2600, 0)
     while True:
         start_collect = re.search('sent done', HLY.com_read())
         if start_collect:
             print('正在模拟探头数据，液位高度设置为2300')
             for i in range(30):
-                HLY.com_send1('*XD,0001,02,2300,2300,0005,0253,1348#')
+                HLY.com_send1(HLY.create_data(1, 2, 2300, 2300, 0))
                 time.sleep(1)
             break
         else:
@@ -149,42 +91,13 @@ def test_steal_oil_check_lessthan_400():
 
 def test_steal_oil_check_morethan_400():
     print('已开始进行偷油量大于400功能测试')
-    while True:
-        start_collect = re.search('sent done', HLY.com_read())
-        if start_collect:
-            print('正在模拟探头数据，液位高度设置为2300')
-            for i in range(30):
-                HLY.com_send1('*XD,0001,02,2300,2300,0005,0253,1348#')
-                time.sleep(1)
-            break
-        else:
-            continue
-
-    while True:
-        report_data = re.search('sendStr', HLY.com_read())
-        if report_data:
-            print('设备已进行主动上报')
-            time.sleep(60)
-            break
-        else:
-            continue
-
-    while True:
-        oh_data = jsonpath.jsonpath(cloud.get_device_detail(),
-                                    '$...dataPoints[?(@.dataPointName == "OH" )].dataPointReportedValue')
-        print(oh_data)
-        if oh_data == [2300]:
-            break
-        else:
-            continue
-    print('油位高度已调整为2300')
-
+    HLY.init_data(1, 2, 2300, 2300, 0)
     while True:
         start_collect = re.search('sent done', HLY.com_read())
         if start_collect:
             print('正在模拟探头数据，液位高度设置为1700')
             for i in range(30):
-                HLY.com_send1('*XD,0001,02,1700,1700,0005,0253,1354#')
+                HLY.com_send1(HLY.create_data(1, 2, 1700, 1700, 0))
                 time.sleep(1)
             break
         else:
@@ -210,42 +123,13 @@ def test_steal_oil_check_morethan_400():
 
 def test_add_oil_check_lessthan_800():
     print('已开始进行加油量小于800功能测试')
-    while True:
-        start_collect = re.search('sent done', HLY.com_read())
-        if start_collect:
-            print('正在模拟探头数据，液位高度设置为1200')
-            for i in range(30):
-                HLY.com_send1('*XD,0001,02,1200,1200,0005,0253,1344#')
-                time.sleep(1)
-            break
-        else:
-            continue
-
-    while True:
-        report_data = re.search('sendStr', HLY.com_read())
-        if report_data:
-            print('设备已进行主动上报')
-            time.sleep(60)
-            break
-        else:
-            continue
-
-    while True:
-        oh_data = jsonpath.jsonpath(cloud.get_device_detail(),
-                                    '$...dataPoints[?(@.dataPointName == "OH" )].dataPointReportedValue')
-        print(oh_data)
-        if oh_data == [1200]:
-            break
-        else:
-            continue
-    print('油位高度已下降至1200')
-
+    HLY.init_data(1, 2, 1200, 1200, 0)
     while True:
         start_collect1 = re.search('sent done', HLY.com_read())
         if start_collect1:
             print('正在模拟探头数据，液位高度设置为1900')
             for i in range(30):
-                HLY.com_send1('*XD,0001,02,1900,1900,0005,0253,1358#')
+                HLY.com_send1(HLY.create_data(1, 2, 1900, 1900, 0))
                 time.sleep(1)
             break
         else:
@@ -271,42 +155,13 @@ def test_add_oil_check_lessthan_800():
 
 def test_add_oil_check_equal_800():
     print('已开始进行加油量等于800功能测试')
-    while True:
-        start_collect = re.search('sent done', HLY.com_read())
-        if start_collect:
-            print('正在模拟探头数据，液位高度设置为1200')
-            for i in range(30):
-                HLY.com_send1('*XD,0001,02,1200,1200,0005,0253,1344#')
-                time.sleep(1)
-            break
-        else:
-            continue
-
-    while True:
-        report_data = re.search('sendStr', HLY.com_read())
-        if report_data:
-            print('设备已进行主动上报')
-            time.sleep(60)
-            break
-        else:
-            continue
-
-    while True:
-        oh_data = jsonpath.jsonpath(cloud.get_device_detail(),
-                                    '$...dataPoints[?(@.dataPointName == "OH" )].dataPointReportedValue')
-        print(oh_data)
-        if oh_data == [1200]:
-            break
-        else:
-            continue
-    print('油位高度已下降至1200')
-
+    HLY.init_data(1, 2, 1200, 1200, 0)
     while True:
         start_collect1 = re.search('sent done', HLY.com_read())
         if start_collect1:
             print('正在模拟探头数据，液位高度设置为2000')
             for i in range(30):
-                HLY.com_send1('*XD,0001,02,2000,2000,0005,0253,1342#')
+                HLY.com_send1(HLY.create_data(1, 2, 2000, 2000, 0))
                 time.sleep(1)
             break
         else:
@@ -332,42 +187,13 @@ def test_add_oil_check_equal_800():
 
 def test_add_oil_check_morethan_800():
     print('已开始进行加油量大于800功能测试')
-    while True:
-        start_collect = re.search('sent done', HLY.com_read())
-        if start_collect:
-            print('正在模拟探头数据，液位高度设置为1200')
-            for i in range(30):
-                HLY.com_send1('*XD,0001,02,1200,1200,0005,0253,1344#')
-                time.sleep(1)
-            break
-        else:
-            continue
-
-    while True:
-        report_data = re.search('sendStr', HLY.com_read())
-        if report_data:
-            print('设备已进行主动上报')
-            time.sleep(60)
-            break
-        else:
-            continue
-
-    while True:
-        oh_data = jsonpath.jsonpath(cloud.get_device_detail(),
-                                    '$...dataPoints[?(@.dataPointName == "OH" )].dataPointReportedValue')
-        print(oh_data)
-        if oh_data == [1200]:
-            break
-        else:
-            continue
-    print('油位高度已下降至1200')
-
+    HLY.init_data(1, 2, 1200, 1200, 0)
     while True:
         start_collect1 = re.search('sent done', HLY.com_read())
         if start_collect1:
             print('正在模拟探头数据，液位高度设置为3000')
             for i in range(30):
-                HLY.com_send1('*XD,0001,02,3000,3000,0005,0253,1344#')
+                HLY.com_send1(HLY.create_data(1, 2, 3000, 3000, 0))
                 time.sleep(1)
             break
         else:
