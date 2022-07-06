@@ -15,6 +15,7 @@ class HLY_API(object):
         self.port = ''
         self.com1 = ''
         self.port1 = ''
+        self.oh = ''
 
     def com_send(self, sendtext):  # 串口发送
         com = self.com
@@ -48,3 +49,14 @@ class HLY_API(object):
             while ser.in_waiting > 0:
                 readtext = ser.read(ser.in_waiting).decode('latin1')  # 一个一个的读取
                 return readtext
+
+    @staticmethod
+    def create_data(oh):
+        data = '0001,02,%s,%s,0005,0253,' % (oh, oh)
+        if len(data) == 28:
+            oh_data = ('*XD,' + data + str(sum(data))+'#')
+            return oh_data
+        elif len(data) > 28:
+            data_real = data[:28]
+            oh_data = ('*XD,' + data + str(sum(data_real))+'#')
+            return oh_data
