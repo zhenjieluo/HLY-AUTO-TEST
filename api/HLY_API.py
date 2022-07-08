@@ -4,11 +4,14 @@
 #  * @Last Modified by:   luo zhenjie 
 #  * @Last Modified time: 2022-06-29 10:23:51 
 #  */
+import sys
+sys.path.insert(0, 'C:/Users/X-X/Desktop/HLY-AUTO-TEST')
 import jsonpath
 import serial
 import re
 import time
 from api.IOT_CLOUD_API import IOT_CLOUD_API
+from api.LOG import logger
 
 cloud = IOT_CLOUD_API()
 cloud.username = 'luozhenjie'
@@ -23,7 +26,6 @@ class HLY_API(object):
         self.port = ''
         self.com1 = ''
         self.port1 = ''
-        self.oh = ''
 
     def com_send(self, sendtext):  # 串口发送
         com = self.com
@@ -53,8 +55,8 @@ class HLY_API(object):
         except:
             ser = serial.Serial(com, port)
         while True:
-            readtext = ''
             while ser.in_waiting > 0:
+                time.sleep(0.1)
                 readtext = ser.read(ser.in_waiting).decode('latin1')  # 一个一个的读取
                 return readtext
 
@@ -81,7 +83,7 @@ class HLY_API(object):
         while True:
             start_collect = re.search('sent done', self.com_read())
             if start_collect:
-                print('正在模拟探头数据，液位高度设置为%s' % oh)
+                logger.info('正在模拟探头数据，液位高度设置为%s' % oh)
                 for i in range(30):
                     self.com_send1(self.create_data(angle, mode, soh, oh, singal))
                     time.sleep(1)
@@ -92,7 +94,7 @@ class HLY_API(object):
         while True:
             report_data = re.search('sendStr', self.com_read())
             if report_data:
-                print('设备已进行主动上报')
+                logger.info('设备已进行主动上报')
                 time.sleep(60)
                 break
             else:
@@ -101,9 +103,44 @@ class HLY_API(object):
         while True:
             oh_data = jsonpath.jsonpath(cloud.get_device_detail(),
                                         '$...dataPoints[?(@.dataPointName == "OH" )].dataPointReportedValue')
-            print(oh_data)
             if oh_data == [oh]:
                 break
             else:
                 continue
-        print('油位高度已调整为%s' % oh)
+        logger.info('油位高度已调整为%s' % oh)
+
+    def fade_init(self, mode):
+        logger.info('现将盲区值初始化为1')
+        if mode == 1:
+            self.init_data(1, 1, 3000, 3000, 40)
+        elif mode == 2:
+            self.init_data(1, 2, 3000, 3000, 0)
+        cloud.fz = '1'
+        while True:
+            cloud.send_device_datapoint()
+            time.sleep(70)
+            fz_data = jsonpath.jsonpath(cloud.get_device_detail(),
+                                        '$...dataPoints[?(@.dataPointName == "FZ" )].dataPointReportedValue')
+            if fz_data == [1]:
+                logger.info('盲区值初始化完毕')
+                break
+            else:
+                continue
+
+    def check_collect_status(self):
+        while True:
+            start_collect = re.search('sent done', self.com_read())
+            if start_collect:
+                logger.info('设备已进入采集状态')
+                break
+            else:
+                continue
+
+    def check_push_status(self):
+        while True:
+            report_data = re.search('sendStr', self.com_read())
+            if report_data:
+                logger.info('设备已进行主动上报')
+                break
+            else:
+                continue

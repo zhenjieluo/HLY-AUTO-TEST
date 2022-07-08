@@ -1,0 +1,13 @@
+INFO     scripts.test_data_filter_check:test_data_filter_check.py:80 2022-07-08 at 15:52:40 | 已开始进行液位高度等于0的功能测试
+INFO     api.HLY_API:HLY_API.py:89 2022-07-08 at 15:52:40 | 正在模拟探头数据，液位高度设置为1000
+INFO     api.HLY_API:HLY_API.py:100 2022-07-08 at 15:53:40 | 设备已进行主动上报
+INFO     api.HLY_API:HLY_API.py:109 2022-07-08 at 15:54:41 | [1000]
+INFO     api.HLY_API:HLY_API.py:114 2022-07-08 at 15:54:41 | 油位高度已调整为1000
+INFO     api.HLY_API:HLY_API.py:138 2022-07-08 at 15:55:41 | 设备已进入采集状态
+INFO     api.HLY_API:HLY_API.py:147 2022-07-08 at 15:56:40 | 设备已进行主动上报
+INFO     api.HLY_API:HLY_API.py:89 2022-07-08 at 15:56:41 | 正在模拟探头数据，液位高度设置为1000
+INFO     api.HLY_API:HLY_API.py:100 2022-07-08 at 15:57:41 | 设备已进行主动上报
+INFO     api.HLY_API:HLY_API.py:109 2022-07-08 at 15:58:41 | [1000]
+INFO     api.HLY_API:HLY_API.py:114 2022-07-08 at 15:58:41 | 油位高度已调整为1000
+INFO     api.HLY_API:HLY_API.py:138 2022-07-08 at 15:59:41 | 设备已进入采集状态
+INFO     api.HLY_API:HLY_API.py:147 2022-07-08 at 16:00:41 | 设备已进行主动上报

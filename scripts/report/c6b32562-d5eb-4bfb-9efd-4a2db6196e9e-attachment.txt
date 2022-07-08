@@ -1,0 +1,7 @@
+INFO     scripts.test_oil_change_check:test_oil_change_check.py:101 2022-07-08 at 17:14:54 | 已开始进行加油量小于800功能测试
+INFO     api.HLY_API:HLY_API.py:89 2022-07-08 at 17:14:55 | 正在模拟探头数据，液位高度设置为1200
+INFO     api.HLY_API:HLY_API.py:100 2022-07-08 at 17:15:54 | 设备已进行主动上报
+INFO     api.HLY_API:HLY_API.py:109 2022-07-08 at 17:16:55 | [1200]
+INFO     api.HLY_API:HLY_API.py:114 2022-07-08 at 17:16:55 | 油位高度已调整为1200
+INFO     api.HLY_API:HLY_API.py:138 2022-07-08 at 17:17:55 | 设备已进入采集状态
+INFO     api.HLY_API:HLY_API.py:147 2022-07-08 at 17:18:55 | 设备已进行主动上报

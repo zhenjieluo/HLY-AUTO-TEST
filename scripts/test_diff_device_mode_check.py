@@ -6,13 +6,14 @@
 # @Software: PyCharm
 
 import sys
-import re
+sys.path.insert(0, 'C:/Users/X-X/Desktop/HLY-AUTO-TEST')
 import time
+import allure
 import jsonpath
+from api.LOG import logger
 from api.HLY_API import HLY_API
 from api.IOT_CLOUD_API import IOT_CLOUD_API
 
-sys.path.insert(0, 'C:/Users/X-X/Desktop/HLY-AUTO-TEST')
 
 HLY = HLY_API()
 cloud = IOT_CLOUD_API()
@@ -27,33 +28,24 @@ cloud.device_id = 'BllRQflFa1jvbcZE4DYA'
 mode_list = [1, 2]
 
 
+@allure.title('探头兼容性测试')
 def test_diff_device_mode_check():
-    print('已开始进行不同探头占号识别的测试')
+    logger.info('已开始进行不同探头占号识别的测试')
     for mode in mode_list:
         if mode == 1:
             singal = 40
         else:
             singal = 0
-        while True:
-            start_collect = re.search('sent done', HLY.com_read())
-            if start_collect:
-                print('正在模拟探头数据，探头占号设置为%s' % mode)
-                for i in range(30):
-                    HLY.com_send1(HLY.create_data(1, mode, 5000, 5000, singal))
-                    time.sleep(1)
-                break
-            else:
-                continue
+        if HLY.check_collect_status():
+            logger.info('正在模拟探头数据，探头占号设置为%s' % mode)
+            for i in range(30):
+                HLY.com_send1(HLY.create_data(1, mode, 5000, 5000, singal))
+                time.sleep(1)
 
-        while True:
-            report_data = re.search('sendStr', HLY.com_read())
-            if report_data:
-                print('设备已进行主动上报，等待15s再进行OLC与AT检查')
-                time.sleep(15)
-                sm_data = jsonpath.jsonpath(cloud.get_device_detail(),
-                                            '$...dataPoints[?(@.dataPointName == "SM" )].dataPointReportedValue')
-                print('当前设备占号设置为：'+str(sm_data))
-                assert sm_data == [mode], '设备不能识别不同探头的占号！！'
-                break
-            else:
-                continue
+        if HLY.check_push_status():
+            logger.info('等待10s后开始校验数据')
+            time.sleep(10)
+            sm_data = jsonpath.jsonpath(cloud.get_device_detail(),
+                                        '$...dataPoints[?(@.dataPointName == "SM" )].dataPointReportedValue')
+            logger.info('当前设备占号设置为：'+str(sm_data))
+            assert sm_data == [mode], '设备不能识别不同探头的占号！！'

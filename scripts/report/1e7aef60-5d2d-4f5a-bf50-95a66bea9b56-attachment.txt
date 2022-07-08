@@ -1,0 +1,9 @@
+INFO     scripts.test_FT_test_check:test_FT_test_check.py:27 2022-07-08 at 15:44:08 | 开始进行FT测试校验
+INFO     scripts.test_FT_test_check:test_FT_test_check.py:46 2022-07-08 at 15:44:38 | FT测试开始
+INFO     scripts.test_FT_test_check:test_FT_test_check.py:49 2022-07-08 at 15:44:38 | 加速度传感器测试已完成
+INFO     scripts.test_FT_test_check:test_FT_test_check.py:52 2022-07-08 at 15:44:38 | flash测试已完成
+INFO     scripts.test_FT_test_check:test_FT_test_check.py:55 2022-07-08 at 15:44:38 | 电池测试已完成
+INFO     scripts.test_FT_test_check:test_FT_test_check.py:58 2022-07-08 at 15:44:38 | 485通讯测试已完成
+INFO     scripts.test_FT_test_check:test_FT_test_check.py:61 2022-07-08 at 15:44:38 | GPS测试已完成
+INFO     scripts.test_FT_test_check:test_FT_test_check.py:64 2022-07-08 at 15:44:38 | 4G模组测试已完成
+INFO     scripts.test_FT_test_check:test_FT_test_check.py:67 2022-07-08 at 15:44:38 | FT 测试已完成

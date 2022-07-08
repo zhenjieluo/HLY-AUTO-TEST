@@ -5,12 +5,13 @@
 #  * @Last Modified time: 2022-07-01 09:37:59 
 #  */
 
+
 import ddddocr
 import json
 
-import null as null
 import requests
 import sys
+
 from retrying import retry
 
 sys.path.insert(0, 'C:/Users/X-X/Desktop/HLY-AUTO-TEST')
@@ -42,14 +43,12 @@ class IOT_CLOUD_API(object):
     def post_html_and_get_response(url, data, headers):
         response = requests.post(url=url, json=data, headers=headers)
         result = response.text
-        print(result)
         return json.loads(result)
 
     @staticmethod
     def put_html_and_get_response(url, data, headers):
         response = requests.put(url=url, json=data, headers=headers)
         result = response.text
-        print(result)
         return json.loads(result)
 
     def get_captcha(self):
@@ -103,7 +102,6 @@ class IOT_CLOUD_API(object):
             'Content-Type': 'application/json;charset=UTF-8'
         }
         result = self.get_html_and_get_response(url, None, header)
-        print(result)
         return result
 
     def send_device_datapoint(self):

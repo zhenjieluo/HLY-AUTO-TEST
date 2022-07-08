@@ -1,9 +1,6 @@
-# /*
-#  * @Author: luo zhenjie 
-#  * @Date: 2022-06-30 10:33:11 
-#  * @Last Modified by:   luo zhenjie 
-#  * @Last Modified time: 2022-06-30 10:33:11 
-#  */
-# -*- coding:utf-8 -*-
-
-
+#!/usr/bin/python3
+# -*- coding: utf-8 -*-
+# @Time    : 2022/7/7 14:12
+# @Author  : luozhenjie
+# @FileName: __init__.py
+# @Software: PyCharm

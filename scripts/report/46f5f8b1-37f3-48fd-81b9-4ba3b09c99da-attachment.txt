@@ -1,0 +1,16 @@
+INFO     scripts.test_data_filter_check:test_data_filter_check.py:225 2022-07-08 at 16:24:46 | 已开始进行电应普小于等于盲区值过滤的功能测试
+INFO     api.HLY_API:HLY_API.py:117 2022-07-08 at 16:24:46 | 现将盲区值初始化为1
+INFO     api.HLY_API:HLY_API.py:89 2022-07-08 at 16:24:46 | 正在模拟探头数据，液位高度设置为3000
+INFO     api.HLY_API:HLY_API.py:100 2022-07-08 at 16:25:46 | 设备已进行主动上报
+INFO     api.HLY_API:HLY_API.py:109 2022-07-08 at 16:26:46 | [3000]
+INFO     api.HLY_API:HLY_API.py:114 2022-07-08 at 16:26:46 | 油位高度已调整为3000
+INFO     api.HLY_API:HLY_API.py:129 2022-07-08 at 16:29:10 | 盲区值初始化完毕
+INFO     scripts.test_data_filter_check:test_data_filter_check.py:227 2022-07-08 at 16:29:10 | 现将液位值初始化至2
+INFO     api.HLY_API:HLY_API.py:89 2022-07-08 at 16:29:47 | 正在模拟探头数据，液位高度设置为2
+INFO     api.HLY_API:HLY_API.py:100 2022-07-08 at 16:30:47 | 设备已进行主动上报
+INFO     api.HLY_API:HLY_API.py:109 2022-07-08 at 16:31:47 | [2]
+INFO     api.HLY_API:HLY_API.py:114 2022-07-08 at 16:31:47 | 油位高度已调整为2
+INFO     scripts.test_data_filter_check:test_data_filter_check.py:232 2022-07-08 at 16:31:47 | 下发盲区值464
+INFO     scripts.test_data_filter_check:test_data_filter_check.py:241 2022-07-08 at 16:35:09 | 当前盲区值已修改至464
+INFO     api.HLY_API:HLY_API.py:138 2022-07-08 at 16:35:48 | 设备已进入采集状态
+INFO     api.HLY_API:HLY_API.py:147 2022-07-08 at 16:36:48 | 设备已进行主动上报
