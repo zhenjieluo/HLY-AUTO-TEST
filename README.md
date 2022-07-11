@@ -15,12 +15,10 @@
 - config    -- 配置文件目录
 - data    -- 测试数据目录
 - doc    -- 文档存放目录
-- log    -- 日志
 - report    -- 测试报告
 - scripts    -- 测试脚本存放目录
 - tools    -- 工具类目录
 - .gitignore    -- git忽略
-- app.py    -- 命令行启动入口
 - pytest.ini    -- pytest测试框架配置文件
 - README.md    -- 开发说明文档
 
@@ -32,8 +30,7 @@
 
 ```python
 [pytest]
-addopts = --html=../report/report.html    # pytest-html报告插件配置 
-;addopts = -s --alluredir report    # allure-pytest报告插件配置
+addopts = -vs --alluredir ./report --clean-alluredir   # allure-pytest-html报告插件配置
 testpaths = ./scripts    # 设置用例目录识别名称
 python_files = test*_*.py    # 设置测试文件识别名称
 python_classes = Test*    # 设置测试类识别名称
