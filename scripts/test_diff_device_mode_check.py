@@ -36,16 +36,16 @@ def test_diff_device_mode_check():
             singal = 40
         else:
             singal = 0
-        if HLY.check_collect_status():
-            logger.info('正在模拟探头数据，探头占号设置为%s' % mode)
-            for i in range(30):
-                HLY.com_send1(HLY.create_data(1, mode, 5000, 5000, singal))
-                time.sleep(1)
+        HLY.check_collect_status()
+        logger.info('正在模拟探头数据，探头占号设置为%s' % mode)
+        for i in range(30):
+            HLY.com_send1(HLY.create_data(1, mode, 5000, 5000, singal))
+            time.sleep(1)
 
-        if HLY.check_push_status():
-            logger.info('等待10s后开始校验数据')
-            time.sleep(10)
-            sm_data = jsonpath.jsonpath(cloud.get_device_detail(),
-                                        '$...dataPoints[?(@.dataPointName == "SM" )].dataPointReportedValue')
-            logger.info('当前设备占号设置为：'+str(sm_data))
-            assert sm_data == [mode], '设备不能识别不同探头的占号！！'
+        HLY.check_push_status()
+        logger.info('等待10s后开始校验数据')
+        time.sleep(10)
+        sm_data = jsonpath.jsonpath(cloud.get_device_detail(),
+                                    '$...dataPoints[?(@.dataPointName == "SM" )].dataPointReportedValue')
+        logger.info('当前设备占号设置为：'+str(sm_data))
+        assert sm_data == [mode], '设备不能识别不同探头的占号！！'

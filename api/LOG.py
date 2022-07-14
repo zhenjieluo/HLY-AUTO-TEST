@@ -4,8 +4,8 @@
 # @Author  : luozhenjie
 # @FileName: LOG.py
 # @Software: PyCharm
-
-
+import sys
+sys.path.insert(0, 'C:/Users/X-X/Desktop/HLY-AUTO-TEST')
 import logging
 from loguru import logger
 

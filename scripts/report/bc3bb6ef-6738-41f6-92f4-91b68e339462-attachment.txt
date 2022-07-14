@@ -1,5 +1,0 @@
-INFO     scripts.test_diff_device_mode_check:test_diff_device_mode_check.py:33 2022-07-08 at 17:00:52 | 已开始进行不同探头占号识别的测试
-INFO     api.HLY_API:HLY_API.py:138 2022-07-08 at 17:00:52 | 设备已进入采集状态
-INFO     api.HLY_API:HLY_API.py:147 2022-07-08 at 17:01:52 | 设备已进行主动上报
-INFO     api.HLY_API:HLY_API.py:138 2022-07-08 at 17:01:52 | 设备已进入采集状态
-INFO     api.HLY_API:HLY_API.py:147 2022-07-08 at 17:02:52 | 设备已进行主动上报

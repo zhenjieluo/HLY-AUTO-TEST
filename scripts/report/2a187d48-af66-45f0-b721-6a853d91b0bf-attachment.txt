@@ -1,7 +1,0 @@
-INFO     scripts.test_data_filter_check:test_data_filter_check.py:34 2022-07-08 at 15:44:38 | 已开始进行倾角大于6度的功能测试
-INFO     api.HLY_API:HLY_API.py:89 2022-07-08 at 15:44:46 | 正在模拟探头数据，液位高度设置为1000
-INFO     api.HLY_API:HLY_API.py:100 2022-07-08 at 15:45:39 | 设备已进行主动上报
-INFO     api.HLY_API:HLY_API.py:109 2022-07-08 at 15:46:39 | [1000]
-INFO     api.HLY_API:HLY_API.py:114 2022-07-08 at 15:46:39 | 油位高度已调整为1000
-INFO     api.HLY_API:HLY_API.py:138 2022-07-08 at 15:47:39 | 设备已进入采集状态
-INFO     api.HLY_API:HLY_API.py:147 2022-07-08 at 15:48:39 | 设备已进行主动上报

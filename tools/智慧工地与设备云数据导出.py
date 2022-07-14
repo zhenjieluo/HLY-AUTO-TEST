@@ -58,7 +58,7 @@ def getData():
                 sheet = wb.active
                 sheet.title ='真实数据'
                 cycle = data1['responseData']['total']
-                page = (cycle+9)//10
+                page = (cycle+999)//1000
                 starttime = datetime.datetime.now()
                 for i in trange(page):
                     x = 0
@@ -68,7 +68,7 @@ def getData():
                             'startTime':(timeStamp*1000),  #1650902400000
                             'endTime':(timeStamp1*1000),      #1651075200000
                             'page':num,
-                            'per_page':10
+                            'per_page':1000
                         }
                     num += 1
                     response1 = requests.get(url=url,headers=headers,params=params1)

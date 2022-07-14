@@ -1,7 +1,0 @@
-INFO     scripts.test_data_filter_check:test_data_filter_check.py:179 2022-07-08 at 16:16:44 | 已开始进行泛特信号值小于等于30的功能测试
-INFO     api.HLY_API:HLY_API.py:89 2022-07-08 at 16:16:44 | 正在模拟探头数据，液位高度设置为1000
-INFO     api.HLY_API:HLY_API.py:100 2022-07-08 at 16:17:44 | 设备已进行主动上报
-INFO     api.HLY_API:HLY_API.py:109 2022-07-08 at 16:18:45 | [1000]
-INFO     api.HLY_API:HLY_API.py:114 2022-07-08 at 16:18:45 | 油位高度已调整为1000
-INFO     api.HLY_API:HLY_API.py:138 2022-07-08 at 16:19:45 | 设备已进入采集状态
-INFO     api.HLY_API:HLY_API.py:147 2022-07-08 at 16:20:45 | 设备已进行主动上报

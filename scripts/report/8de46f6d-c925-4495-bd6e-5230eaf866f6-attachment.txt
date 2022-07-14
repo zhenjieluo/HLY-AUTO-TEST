@@ -1,7 +1,0 @@
-INFO     scripts.test_oil_change_check:test_oil_change_check.py:32 2022-07-08 at 17:02:52 | 已开始进行偷油量等于400功能测试
-INFO     api.HLY_API:HLY_API.py:89 2022-07-08 at 17:02:52 | 正在模拟探头数据，液位高度设置为3000
-INFO     api.HLY_API:HLY_API.py:100 2022-07-08 at 17:03:52 | 设备已进行主动上报
-INFO     api.HLY_API:HLY_API.py:109 2022-07-08 at 17:04:53 | [3000]
-INFO     api.HLY_API:HLY_API.py:114 2022-07-08 at 17:04:53 | 油位高度已调整为3000
-INFO     api.HLY_API:HLY_API.py:138 2022-07-08 at 17:05:53 | 设备已进入采集状态
-INFO     api.HLY_API:HLY_API.py:147 2022-07-08 at 17:06:53 | 设备已进行主动上报
