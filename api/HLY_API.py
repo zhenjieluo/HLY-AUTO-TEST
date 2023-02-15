@@ -16,7 +16,7 @@ from api.LOG import logger
 cloud = IOT_CLOUD_API()
 cloud.username = 'luozhenjie'
 cloud.password = 'aa123456'
-cloud.device_id = 'BllRQflFa1jvbcZE4DYA'
+cloud.device_id = 'Bm35VEJuEmaveUZx4GYA'
 
 
 class HLY_API(object):
@@ -60,6 +60,19 @@ class HLY_API(object):
                 readtext = ser.read(ser.in_waiting).decode('latin1')  # 一个一个的读取
                 return readtext
 
+    def com_read1(self):  # 串口读取
+        com1 = self.com1
+        port1 = self.port1
+        try:
+            ser = serial.Serial(com1, port1)
+        except:
+            ser = serial.Serial(com1, port1)
+        while True:
+            while ser.in_waiting > 0:
+                time.sleep(0.1)
+                readtext = ser.read(ser.in_waiting).decode('latin1')  # 一个一个的读取
+                return readtext
+
     @staticmethod
     def create_data(angle, mode, soh, oh, singal):
         data_list = []
@@ -81,7 +94,7 @@ class HLY_API(object):
 
     def init_data(self, angle, mode, soh, oh, singal):
         while True:
-            start_collect = re.search('sent done', self.com_read())
+            start_collect = re.search('start collect oil!!!', self.com_read())
             if start_collect:
                 logger.info('正在模拟探头数据，液位高度设置为%s' % oh)
                 for i in range(30):
@@ -92,7 +105,7 @@ class HLY_API(object):
                 continue
 
         while True:
-            report_data = re.search('sendStr', self.com_read())
+            report_data = re.search('send msg', self.com_read())
             if report_data:
                 logger.info('设备已进行主动上报')
                 time.sleep(60)
@@ -111,13 +124,14 @@ class HLY_API(object):
 
     def fade_init(self, mode):
         logger.info('现将盲区值初始化为1')
+        cloud.fz = '1'
+        cloud.send_device_datapoint()
+        time.sleep(20)
         if mode == 1:
             self.init_data(1, 1, 3000, 3000, 40)
         elif mode == 2:
             self.init_data(1, 2, 3000, 3000, 0)
-        cloud.fz = '1'
         while True:
-            cloud.send_device_datapoint()
             time.sleep(70)
             fz_data = jsonpath.jsonpath(cloud.get_device_detail(),
                                         '$...dataPoints[?(@.dataPointName == "FZ" )].dataPointReportedValue')
@@ -129,7 +143,7 @@ class HLY_API(object):
 
     def check_collect_status(self):
         while True:
-            start_collect = re.search('sent done', self.com_read())
+            start_collect = re.search('start collect oil!!!', self.com_read())
             if start_collect:
                 logger.info('设备已进入采集状态')
                 break
@@ -138,7 +152,7 @@ class HLY_API(object):
 
     def check_push_status(self):
         while True:
-            report_data = re.search('sendStr', self.com_read())
+            report_data = re.search('send msg', self.com_read())
             if report_data:
                 logger.info('设备已进行主动上报')
                 break

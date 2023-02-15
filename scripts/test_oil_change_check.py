@@ -18,13 +18,13 @@ from api.IOT_CLOUD_API import IOT_CLOUD_API
 HLY = HLY_API()
 cloud = IOT_CLOUD_API()
 
-HLY.com = 'com5'
+HLY.com = 'com10'
 HLY.port = 115200
-HLY.com1 = 'com13'
+HLY.com1 = 'com6'
 HLY.port1 = 9600
 cloud.username = 'luozhenjie'
 cloud.password = 'aa123456'
-cloud.device_id = 'BllRQflFa1jvbcZE4DYA'
+cloud.device_id = 'Bm35VEJuEmaveUZx4GYA'
 
 
 @allure.title('校验偷油量等于400是否告警')

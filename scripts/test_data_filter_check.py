@@ -21,13 +21,13 @@ from api.IOT_CLOUD_API import IOT_CLOUD_API
 HLY = HLY_API()
 cloud = IOT_CLOUD_API()
 
-HLY.com = 'com5'
+HLY.com = 'com10'
 HLY.port = 115200
-HLY.com1 = 'com13'
+HLY.com1 = 'com6'
 HLY.port1 = 9600
 cloud.username = 'luozhenjie'
 cloud.password = 'aa123456'
-cloud.device_id = 'BllRQflFa1jvbcZE4DYA'
+cloud.device_id = 'Bm35VEJuEmaveUZx4GYA'
 mode_list = [1, 2]
 
 
@@ -226,14 +226,15 @@ def test_singal_filter_morethan_30_ft():
 def test_lessthan_fade_filter_dyp():
     logger.info('已开始进行电应普小于等于盲区值过滤的功能测试')
     HLY.fade_init(2)
-    logger.info('现将液位值初始化至2')
-    HLY.init_data(1, 2, 2, 2, 0)
 
     fz = randint(2, 1999)
     cloud.fz = str(fz)
     logger.info('下发盲区值%s' % fz)
     fz_oh = randint(2, fz)
     cloud.send_device_datapoint()
+    time.sleep(20)
+    logger.info('现将液位值初始化至%s' % (fz+1))
+    HLY.init_data(1, 2, (fz+1), (fz+1), 0)
 
     while True:
         time.sleep(100)
@@ -253,7 +254,7 @@ def test_lessthan_fade_filter_dyp():
             oh_data = jsonpath.jsonpath(cloud.get_device_detail(),
                                         '$...dataPoints[?(@.dataPointName == "OH" )].dataPointReportedValue')
             logger.info('液位高度为：' + str(oh_data))
-            assert oh_data == [2], '探头液位值小于等于盲区值时，数据不能被接收！！'
+            assert oh_data == [fz+1], '探头液位值小于等于盲区值时，数据不能被接收！！'
             break
         else:
             continue
@@ -263,14 +264,15 @@ def test_lessthan_fade_filter_dyp():
 def test_morethan_fade_filter_dyp():
     logger.info('已开始进行电应普大于盲区值过滤的功能测试')
     HLY.fade_init(2)
-    logger.info('现将液位值初始化至2')
-    HLY.init_data(1, 2, 2, 2, 0)
 
     fz = randint(2, 1999)
     cloud.fz = str(fz)
     logger.info('下发盲区值%s' % fz)
     fz_oh = randint((fz + 1), 12000)
     cloud.send_device_datapoint()
+    time.sleep(20)
+    logger.info('现将液位值初始化至%s' % (fz + 1))
+    HLY.init_data(1, 2, (fz + 1), (fz + 1), 0)
 
     while True:
         time.sleep(100)

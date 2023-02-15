@@ -1,4 +1,0 @@
-INFO     api.HLY_API:HLY_API.py:143 2022-07-14 at 09:40:58 | 设备已进行主动上报
-INFO     scripts.test_low_power_check:test_low_power_check.py:32 2022-07-14 at 09:40:58 | 等待10s后开始校验数据
-INFO     api.HLY_API:HLY_API.py:143 2022-07-14 at 09:41:59 | 设备已进行主动上报
-INFO     scripts.test_low_power_check:test_low_power_check.py:37 2022-07-14 at 09:41:59 | 等待10s后开始校验数据

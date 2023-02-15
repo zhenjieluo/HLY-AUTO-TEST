@@ -148,3 +148,40 @@ class IOT_CLOUD_API(object):
         }
         result = self.put_html_and_get_response(url, data, header)
         return result
+
+    def send_device_datapoint1(self):
+        iot_url = self.iot_url
+        device_id = self.device_id
+        token = self.token
+        cmd = self.cmd
+        fv = self.fv
+        fz = self.fz
+        rf = self.rf
+        sn = self.sn
+        url = iot_url + '/api/itms/devices/' + device_id + '/datapoints'
+        if token:
+            token_in_use = token
+        else:
+            login_result = self.login()
+            token_in_use = login_result['responseData']['accessToken']
+        header = {
+            'accessToken': token_in_use,
+            'Content-Type': 'application/json'
+        }
+        data = {
+            'dataPoints': [{
+                    'dataPointName': 'CMD',
+                    'dataPointDesiredValue': cmd
+                },
+                {
+                    'dataPointName': 'FV',
+                    'dataPointDesiredValue': fv
+                },
+                {
+                    'dataPointName': 'URL',
+                    'dataPointDesiredValue': ''
+                }
+            ]
+        }
+        result = self.put_html_and_get_response(url, data, header)
+        return result

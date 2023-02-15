@@ -6,7 +6,7 @@
 #  */
 
 import sys
-sys.path.insert(0, 'C:/Users/X-X/Desktop/HLY-AUTO-TEST')
+sys.path.insert(0, '/')
 import re
 import time
 import allure
@@ -25,13 +25,15 @@ data = []
 def test_FT():
     num = 0
     logger.info('开始进行FT测试校验')
+    HLY.com_send('reboot')
+    rb_data = re.search('wait test cmd counter', HLY.com_read())
+    time.sleep(1)
     HLY.com_send('start FT')
 
-    t_end = time.time() + 30
+    t_end = time.time() + 50
     while time.time() < t_end:
         ser_data = HLY.com_read()
         data.append(ser_data)
-
     ft_start = re.search('start FT', str(data))
     acc_start = re.search('FT acceleration', str(data))
     flash_start = re.search('FT flash', str(data))
